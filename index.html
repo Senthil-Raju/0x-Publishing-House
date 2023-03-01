@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>My Notes</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+</head>
+<body>
+  <h1>My Notes</h1>
+  <textarea id="text-area" rows="10" cols="50"></textarea>
+  <br>
+  <button onclick="saveText()">Save Text</button>
+  <button onclick="savePDF()">Save PDF</button>
+  <script>
+    function saveText() {
+      const text = document.getElementById('text-area').value;
+      window.localStorage.setItem('text', text);
+      alert('Text saved!');
+    }
+
+    function savePDF() {
+      const doc = new jsPDF();
+      const text = document.getElementById('text-area').value;
+      doc.text(text, 10, 10);
+      doc.save('my-notes.pdf');
+      alert('PDF saved!');
+    }
+
+    const savedText = window.localStorage.getItem('text');
+    const textArea = document.getElementById('text-area');
+    textArea.value = savedText;
+  </script>
+</body>
+</html>
